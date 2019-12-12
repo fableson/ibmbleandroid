@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>BLE Dynamic UI</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<script language="JavaScript">
+function startup() {
+	try {
+		window.bleui.Info("Starting up....");
+	} catch (ee) {
+		
+	}
+}
+function go() {
+    document.getElementById('arduino').class='notconnected';
+    window.bleui.interrogate();
+}
+function goopen() {
+    document.getElementById('arduino').class='notconnected';
+    window.bleui.toggleDoor();
+}
+function setClassOnArduino(c) {
+    document.getElementById('arduino').className = c;
+}
+function setActuating(c) {
+    document.getElementById('toshiba').className = c;
+    document.getElementById('liftmaster').className = c;
+}
+function setStatus(s) {
+    document.getElementById('status').innerHTML = s;
+
+}
+</script>
+<style>
+.notconnected {
+    border: 5px solid red;
+}
+.searching {
+    border: 5px dotted yellow;
+}
+.discovering {
+    border: 5px dashed green;
+}
+.communicating {
+    border: 5px solid green;
+}
+</style>
+<body >
+<center>
+    <h3>Expensive Garage Door Opener</h3>
+    <p>This demonstrates using an Arduino-powered BLE board</p>
+    <p id="status"></p>
+    <img id="arduino" style="width:35%;" src="arduino33.jpg"><br>
+    <p>energizing a small opto-isolated solid state relay (Toshiba TLP222A)</p>
+    <img id="toshiba" style="width:35%;" src="toshibarelay.jpg"><br>
+    <p>To actuate to a (slightly modified) commercial garage door opener</p>
+    <img id="liftmaster" style="width:35%;" src="garagedooropener.jpg"><br>
+    <button onclick="go();">Interrogate Device</button>
+    <button onclick="goopen();">Toggle the Door</button>
+</center>
+</body>
+</html>
